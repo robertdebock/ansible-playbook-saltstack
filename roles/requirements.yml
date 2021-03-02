@@ -1,0 +1,6 @@
+---
+- role: robertdebock.bootstrap
+- role: robertdebock.common
+- role: robertdebock.digitalocean_agent
+- role: robertdebock.openssh
+- role: robertdebock.users

@@ -1,0 +1,11 @@
+---
+
+users_user_list:
+  - name: jasmin
+    # SuperSecure!
+    password: "$6$x07YQ4SdzERlmkfF$6Qgi3TPlV34TsjMYYzposnNZRJOkIH784bWyYb5Qt4ecM8Zht5MfxEqo.cCwScVnW7rs3KjwYvbI9hzPjQ1xI/"
+    sudo_options: "ALL=(ALL) NOPASSWD: ALL"
+  - name: leo
+    # SuperSecure!
+    password: "$6$x07YQ4SdzERlmkfF$6Qgi3TPlV34TsjMYYzposnNZRJOkIH784bWyYb5Qt4ecM8Zht5MfxEqo.cCwScVnW7rs3KjwYvbI9hzPjQ1xI/"
+    sudo_options: "ALL=(ALL) NOPASSWD: ALL"

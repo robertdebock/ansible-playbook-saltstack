@@ -1,0 +1,19 @@
+xset s noblank
+xset s off
+xset -dpms
+
+unclutter -idle 3.0 -root &  
+
+sed -i 's/"exited_cleanly":false/"exited_cleanly":true/' /home/kiosk/.config/chr
+omium/Default/Preferences
+sed -i 's/"exit_type":"Crashed"/"exit_type":"Normal"/' /home/kiosk/.config/chrom
+ium/Default/Preferences
+
+/usr/bin/chromium --noerrdialogs --disable-infobars --kiosk https://google.nl/ https://github.com/ &
+
+vncserver -alwaysshared -geometry 1024x768 -depth 16 &
+
+while true; do
+  xdotool keydown ctrl+Tab; xdotool keyup ctrl+Tab;
+  sleep 15
+done

@@ -1,0 +1,112 @@
+#!/usr/bin/env ansible-playbook
+---
+- name: create machines
+  hosts: localhost
+  gather_facts: no
+
+  tasks:
+    - name: apply terraform code
+      terraform:
+        project_path: ./terraform
+        state: present
+      register: terraform
+
+    - name: add master to inventory
+      add_host:
+        name: "{{ terraform.outputs.master.value }}"
+        groups:
+          - master
+
+    - name: add minions to inventory
+      add_host:
+        name: "{{ item }}"
+        groups:
+          - minions
+      loop: "{{ terraform.outputs.minions.value }}"
+
+- name: setup all node
+  hosts: all
+  become: yes
+  gather_facts: no
+  remote_user: root
+
+  pre_tasks:
+    - name: pause
+      pause:
+        seconds: 60
+
+    - name: wait for the host to be available
+      wait_for:
+        port: 22
+
+    - name: wait for cloud-init to finish
+      wait_for:
+        path: /var/lib/cloud/instance/boot-finished
+
+  roles:
+    - role: robertdebock.bootstrap
+    - role: robertdebock.common
+    - role: robertdebock.openssh
+    - role: robertdebock.users
+
+  post_tasks:
+    - name: set salt master on minions
+      lineinfile:
+        path: /etc/salt/minion
+        regexp: "^master: "
+        line: "master: master"
+      notify:
+<<<<<<< HEAD
+        - restart salt
+
+    - name: pause
+      pause:
+        seconds: 60
+=======
+        - reboot
+
+    - name: flush handlers
+      meta: flush_handlers
+
+    - name: create rancher server container
+      docker_container:
+        name: rancher
+        image: rancher/rancher
+        restart_policy: always
+        privileged: yes
+        ports:
+          - "80:80"
+          - "443:443"
+>>>>>>> 1b0125e93b915f84ea48fe44ab889fef380726e6
+
+    - name: show rancher endpoint
+      debug:
+        msg: "Rancher is installed at https://{{ ansible_fqdn }}/"
+
+  handlers:
+    - name: restart salt
+      service:
+        name: salt-minion
+        state: restarted
+
+- name: setup master node
+  hosts: master
+  become: yes
+  gather_facts: no
+  remote_user: root
+
+  tasks:
+    - name: accept keys
+      command: salt-key --yes --accept-all
+
+    - name: send salt code to master
+      synchronize:
+        src: salt
+        dest: /srv
+
+    - name: apply salt state
+      command: salt '*' state.apply
+
+    - name: show connection details
+      debug:
+        msg: "Please connect to {{ ansible_default_ipv4.address }}"
