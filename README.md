@@ -23,7 +23,7 @@ export TF_VAR_do_token="REPLACE_ME_WITH_THE_DO_TOKEN"
 
 ## Installation
 
-Apply the playbo0k:
+Apply the playbook:
 ```
 ./playbook.yml
 ```
