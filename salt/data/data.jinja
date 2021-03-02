@@ -1,0 +1,10 @@
+# {% set dashboards = salt['grains.filter_by']({
+#   'minion-0': "https://interdiscount.ch/ https://github.com",
+#   'minion-1': "https://github.com/"
+#   }) %}
+
+{% set dashboards {
+  'minion-0': "https://interdiscount.ch/ https://github.com",
+  'minion-1': "https://github.com/"
+}
+%}

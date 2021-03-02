@@ -7,3 +7,4 @@ kiosk_packages_installed:
       - sed
       - gdm
       - xorg-x11-Xvnc
+      - cron

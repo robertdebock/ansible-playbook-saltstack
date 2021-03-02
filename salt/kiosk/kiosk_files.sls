@@ -1,6 +1,9 @@
+{% from "data/data.yml" import dashboards with context %}
+
 /home/kiosk/.xinitrc:
   file.managed:
-    - source: salt://kiosk/files/xinitrc
+    - source: salt://kiosk/templates/xinitrc.j2
+    - template: jinja
     - mode: 544
     - user: kiosk
     - group: users
@@ -24,3 +27,7 @@ gdm_displaymanager:
     - mode: 600
     - user: kiosk
     - group: users
+
+/etc/cron.d/reboot:
+  file.managed:
+    - source: salt://kiosk/files/cron-reboot

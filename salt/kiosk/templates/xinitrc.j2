@@ -1,3 +1,8 @@
+{% set dashboards =
+  'minion-0': "https://interdiscount.ch/ https://github.com",
+  'minion-1': "https://github.com/"
+%}
+
 xset s noblank
 xset s off
 xset -dpms
@@ -9,9 +14,9 @@ omium/Default/Preferences
 sed -i 's/"exit_type":"Crashed"/"exit_type":"Normal"/' /home/kiosk/.config/chrom
 ium/Default/Preferences
 
-/usr/bin/chromium --noerrdialogs --disable-infobars --kiosk https://google.nl/ https://github.com/ &
+/usr/bin/chromium --noerrdialogs --disable-infobars --kiosk {{ dashboards[grains.get('nodename')] }} &
 
-vncserver -alwaysshared -geometry 1024x768 -depth 16 &
+vncserver :1 -alwaysshared -geometry 1024x768 -depth 16 &
 
 while true; do
   xdotool keydown ctrl+Tab; xdotool keyup ctrl+Tab;
