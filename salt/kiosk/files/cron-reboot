@@ -1,1 +1,1 @@
-0 11 * * * root /usr/sbin/reboot
+0 3 * * * root /sbin/reboot

@@ -1,4 +1,6 @@
-{% from "data/data.yml" import dashboards with context %}
+# Load yml files based on the fqdn from the config directory.
+{% set server_properties_file = (slspath + '/config/' + grains['fqdn'] + '.yml') %} 
+{% import_yaml server_properties_file as server_properties %}
 
 /home/kiosk/.xinitrc:
   file.managed:
@@ -7,6 +9,8 @@
     - mode: 544
     - user: kiosk
     - group: users
+    - context:
+        url: {{ server_properties.url }}
 
 gdm_displaymanager:
   file.replace:

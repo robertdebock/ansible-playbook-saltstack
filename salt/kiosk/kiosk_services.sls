@@ -5,3 +5,6 @@ display-manager:
     - watch:
       - file: /etc/sysconfig/displaymanager
       - file: /home/kiosk/.xinitrc
+cron:
+  service.running:
+    - enable: True
