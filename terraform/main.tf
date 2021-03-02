@@ -21,7 +21,6 @@ module "master" {
   vpc_uuid  = module.vpc.id
   user_data = "#!/bin/sh\ncurl -L https://bootstrap.saltstack.com -o install_salt.sh\nsudo sh install_salt.sh -P -M -x python3"
 }
-<<<<<<< HEAD
 
 module "minions" {
   source    = "robertdebock/droplet/digitalocean"
@@ -34,5 +33,3 @@ module "minions" {
   vpc_uuid  = module.vpc.id
   user_data = "#!/bin/sh\ncurl -L https://bootstrap.saltstack.com -o install_salt.sh\nsudo sh install_salt.sh -P -x python3"
 }
-=======
->>>>>>> 1b0125e93b915f84ea48fe44ab889fef380726e6
