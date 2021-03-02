@@ -56,28 +56,11 @@
         regexp: "^master: "
         line: "master: master"
       notify:
-<<<<<<< HEAD
         - restart salt
 
     - name: pause
       pause:
         seconds: 60
-=======
-        - reboot
-
-    - name: flush handlers
-      meta: flush_handlers
-
-    - name: create rancher server container
-      docker_container:
-        name: rancher
-        image: rancher/rancher
-        restart_policy: always
-        privileged: yes
-        ports:
-          - "80:80"
-          - "443:443"
->>>>>>> 1b0125e93b915f84ea48fe44ab889fef380726e6
 
     - name: show rancher endpoint
       debug:
