@@ -1,4 +1,4 @@
-# Ansible playbook for Rancher
+# Ansible playbook for SaltStack
 
 ## Setup
 
@@ -19,7 +19,6 @@ terraform init
 
 ```shell
 export TF_VAR_do_token="REPLACE_ME_WITH_THE_DO_TOKEN"
-export TF_VAR_cloudflare_api_token="REPLACE_ME_WITH_THE_CF_TOKEN"
 ```
 
 ## Installation
@@ -28,14 +27,6 @@ Apply the playbo0k:
 ```
 ./playbook.yml
 ```
-
-This will:
-
-1. Create the infrastructure using Terraform.
-2. Install Docker. (Including all requirements.)
-3. Create the `rancher/rancher` container.
-
-Finally, login. (URL displayed at the end of the play.)
 
 ### Files
 
