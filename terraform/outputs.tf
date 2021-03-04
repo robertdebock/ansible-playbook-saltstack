@@ -1,7 +1,7 @@
 output "master" {
-  value = module.master.ipv4_address
+  value = module.masterrecord.hostname
 }
 
 output "minions" {
-  value = module.minions.*.ipv4_address
+  value = module.minionrecords.*.hostname
 }

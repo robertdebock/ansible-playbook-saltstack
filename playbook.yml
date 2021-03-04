@@ -62,10 +62,6 @@
       pause:
         seconds: 60
 
-    - name: show rancher endpoint
-      debug:
-        msg: "Rancher is installed at https://{{ ansible_fqdn }}/"
-
   handlers:
     - name: restart salt
       service:

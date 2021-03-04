@@ -8,3 +8,5 @@ kiosk_packages_installed:
       - gdm
       - xorg-x11-Xvnc
       - cron
+      - chromedriver
+      # - python2-selenium
